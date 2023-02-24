@@ -17,8 +17,10 @@ const theme = createTheme({
     },
   },
 });
+// localforage をインポート
+import localforage from 'localforage';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToolBar } from './ToolBar';
 import { FormDialog } from './FormDialog';
 import { ActionButton } from './ActionButton';
@@ -36,6 +38,24 @@ export const App = () => {
   const [qrOpen, setQrOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+
+  //useEffect
+  /**
+   * キー名 'todo-sample-2023' のデータを取得
+   * 第 2 引数の配列が空なのでコンポーネントのマウント時のみに実行される
+   */
+  useEffect(() => {
+    localforage
+      .getItem('todo-sample-2023')
+      .then((values) => setTodos(values as Todo[]));
+  }, []);
+
+  /**
+   * todos ステートが更新されたら、その値を保存
+   */
+  useEffect(() => {
+    localforage.setItem('todo-sample-2023', todos);
+  }, [todos]);
 
   //functions
   const handleToggleAlert = () => setAlertOpen(!alertOpen);
