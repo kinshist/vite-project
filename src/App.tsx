@@ -1,6 +1,8 @@
 import { indigo, pink } from '@mui/material/colors';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { isTodos } from './lib/isTodo';
+
 // テーマを作成
 const theme = createTheme({
   palette: {
@@ -47,7 +49,7 @@ export const App = () => {
   useEffect(() => {
     localforage
       .getItem('todo-sample-2023')
-      .then((values) => setTodos(values as Todo[]));
+      .then((values) => isTodos(values) && setTodos(values));
   }, []);
 
   /**
