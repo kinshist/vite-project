@@ -18,7 +18,7 @@ export default defineConfig({
         orientation: 'portrait',
         theme_color: '#3f51b2',
         background_color: '#efeff4',
-        id: '/react-todo/',
+        id: '/vite-project/',
         icons: [
           {
             src: 'icon-192x192.png',
